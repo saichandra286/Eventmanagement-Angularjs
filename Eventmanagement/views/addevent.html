@@ -1,0 +1,104 @@
+ <staticContent>
+    <remove fileExtension=".json" />
+    <mimeMap fileExtension=".json" mimeType="application/json" />
+  </staticContent>
+<div class="row">
+<div>
+	
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h3>Add Event</h3></div>
+		<div class="panle-body">
+			<form class="form" role="form" ng-submit='addEventf.$valid && subform(eventf)' id="addEventf" name="addEventf" novalidate>
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+					<div class="form-group" ng-class="{'has-error':addEventf.evename.$touched && addEventf.evename.$invalid, 'has-success':addEventf.evename.$touched && addEventf.evename.$valid}">
+						<label for="evename" class="control-label">Name</label>
+						<input type="text" ng-model="eventf.name" class="form-control" required name="evename" placeholder="Event Name">
+						<p class="help-block" ng-show="addEventf.$dirty && addEventf.evename.$invalid" >The event name</p>
+					</div>
+				</div>
+
+					<div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+					<div class="form-group">
+						<label for="evedesc" class="control-label">description</label>
+						<input type="text" ng-model="eventf.desc" class="form-control" name="evedesc" placeholder="Event Description">
+						<p class="help-block">The event description</p>
+					</div>
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+					<div class="form-group">
+						<label for="evedate" class="control-label">Date</label>
+						<input type="text" ng-pattern='/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/' ng-model="eventf.date" class="form-control" name="evedate" placeholder="yyyy-MM-dd" required>
+						<p class="help-block" ng-show="addEventf.$dirty && addEventf.evedate.$invalid">Date formate Must in yyyy-MM-dd</p>
+					</div>
+				</div>
+
+					<div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+					<div class="form-group">
+						<label for="eveloc" class="control-label">Location</label>
+						<input type="text" ng-model="eventf.location" class="form-control" name="eveloc" placeholder="Event Location">
+						<p class="help-block">The event Location</p>
+					</div>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+					<div class="form-group">
+						<label for="eveCategory" class="control-label">Category</label>
+						<select class="form-control" ng-model="sop" data-width="100%" name="eventCategory" ng-options="catg.name group by catg.group for catg in categories track by catg.id">
+						</select>
+						<p class="help-block">Select the event cateogry</p>
+					</div>
+				</div>
+
+					<div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+					<div class="form-group">
+						<label for="evemail" class="control-label">Email</label>
+						<input type="email" ng-model="eventf.email" class="form-control" name="evemail" placeholder="Email info">
+						<p class="help-block">The contact email</p>
+					</div>
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+					<div class="form-group">
+						<label for="evespecial" class="control-label">Special event?</label><br>
+						<label>
+							<input type="radio" ng-model="eventf.speceve" value="true">Yes
+						</label>
+						<label>
+							<input type="radio" ng-model="eventf.speceve" value="false">No
+						</label>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+					<div class="form-group" ng-if="eventf.speceve === 'true' ">
+						<label for="evespecialtypes" class="control-label">Special event Type</label><br>
+						<div ng-repeat="type in spectype">
+							<input type="checkbox" name="eventspecialtype" ng-model="type.checked">{{type.name}}
+						</div>
+						<input type="checkbox" ng-model="bothsel" ng-click="both()" name="alltypes">Both
+						</div>
+					</div>
+				</div>
+
+				<hr />
+
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+						<div class="form-group">
+							<button type="submit" ng-disabled="addEventf.$invalid" class="btn btn-primary">Submit</button>
+							<button type="reset" class="btn btn-primary">Reset</button>
+						</div>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+
+</div>
