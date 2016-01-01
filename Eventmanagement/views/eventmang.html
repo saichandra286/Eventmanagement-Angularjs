@@ -1,0 +1,50 @@
+<div>
+		search:<input type="text" ng-model="search.$">
+		Eventname:<input type="text" ng-model="search.name">
+		Eventdesc:<input type="text" ng-model="search.desc">
+		Eventcategory:<input type="text" ng-model="search.category">
+		Exact search<input type="checkbox" ng-model="str"> 
+		<button ng-click="search=undefined">clear</button>
+		<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Event.no</th>
+				<th>Event</th>
+				<th>Description</th>
+				<th>Category</th>
+				<th>Contact mail</th>
+				<th>Location</th>
+				<th>Date</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="eve in event | filter: search : str" >
+			<td>{{eve.id}}</td>
+			<td ng-show="!edit[eve.id]" ng-switch on="eve.speceve">
+			<span highlight evenam="{{eve.name}}" ng-switch-when="true"></span>
+			<span ng-switch-default>{{eve.name}}</span>
+			</td>
+			<td ng-show="!edit[eve.id]">{{eve.desc}}</td>
+			<td ng-show="!edit[eve.id]">{{eve.category}}</td>
+			<td ng-show="!edit[eve.id]">{{eve.email}}</td>
+			<td ng-show="!edit[eve.id]">{{eve.location}}</td>
+			<td ng-show="!edit[eve.id]">{{eve.date | date: 'yyyy-MM-dd'}}</td>
+			<td ng-show="!edit[eve.id]">
+			<button class="btn btn-primary" ng-click="edit[eve.id]= !edit[eve.id]">Edit</button>
+			<button class="btn btn-danger" ng-click="del(eve)">Delete</button></td>
+
+			<td ng-show="edit[eve.id]"><input type="text" ng-model="eve.name"></td>
+			<td ng-show="edit[eve.id]"><input type="text" ng-model="eve.desc"></td>
+			<td ng-show="edit[eve.id]"><input type="text" ng-model="eve.category"></td>
+			<td ng-show="edit[eve.id]"><input type="text" ng-model="eve.email"></td>
+			<td ng-show="edit[eve.id]"><input type="text" ng-model="eve.location"></td>
+			<td ng-show="edit[eve.id]"><input type="text" ng-model="eve.date"></td>
+			<td ng-show="edit[eve.id]">
+				<button class="btn btn-primary" ng-click="edit[eve.id]=!edit[eve.id];update(eve)">Save</button>
+				<button class="btn btn-warning" ng-click="edit[eve.id]=!edit[eve.id]">Undo</button>
+			</td>
+			</tr>
+		</tbody>
+		</table>
+</div>
